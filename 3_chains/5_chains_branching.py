@@ -43,4 +43,28 @@ classification_template = ChatPromptTemplate.from_messages(
     ]
 )
 
-1:14:25
+branches = RunnableBranch(
+    (
+        lambda x: "positive" in x,
+        positive_feedback_template | model | StrOutputParser()
+    ),
+    (
+        lambda x: "negative" in x,
+        negative_feedback_template | model | StrOutputParser()
+    ),
+    (
+        lambda x: "netural" in x,
+        neutral_feedback_template | model | StrOutputParser()
+    ),
+    escalate_feedback_template | model | StrOutputParser()
+)
+
+classification_chain = classification_template | model | StrOutputParser()
+
+chain = classification_chain | branches
+
+review = "The product is terrible. I broke after just one use and the quality is very poor."
+review1 = "The product is okay. It works as expected but nothing exceptional."
+result = chain.invoke({"feedback": review1})
+
+print(result)
