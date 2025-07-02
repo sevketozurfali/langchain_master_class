@@ -8,7 +8,7 @@ from langchain_community.vectorstores import Chroma
 from langchain_ollama.embeddings import OllamaEmbeddings
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(current_dir, "books", "summary_of_gladiators.txt")
+file_path = os.path.join(current_dir, "books", "odyssey.txt")
 persistent_directory = os.path.join(current_dir, "db", "chroma_db")
 
 if not os.path.exists(persistent_directory):

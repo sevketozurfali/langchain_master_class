@@ -11,10 +11,10 @@ embeddings = OllamaEmbeddings(model="nomic-embed-text:latest")
 
 db = Chroma(persist_directory=persistent_directory, embedding_function=embeddings)
 
-query = "Who is Gladiator"
+query = "Who is Jove"
 
 retriever = db.as_retriever(search_type="similarity_score_threshold",
-                            search_kwargs={"k": 3, "score_threshold": 0.3}
+                            search_kwargs={"k": 1, "score_threshold": 0.3}
                             )
 
 relevant_docs = retriever.invoke(query)
