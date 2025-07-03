@@ -47,7 +47,7 @@ def query_vector_store(store_name, query, embedding_function):
         db = Chroma(persist_directory=persistent_directory, embedding_function=embedding_function)
         retriever = db.as_retriever(
             search_type="similarity_score_threshold",
-            search_kwargs={"k":1, "score_threshold": 0.1},
+            search_kwargs={"k":1, "score_threshold": 0.2},
         )
 
         relevant_docs = retriever.invoke(query)
